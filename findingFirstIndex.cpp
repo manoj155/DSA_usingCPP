@@ -4,30 +4,30 @@
 #include <vector>
 using namespace std;
 
-int findFirstIndex(vector<int> &v, int target) {
-  int s = 0;
-  int e = v.size() - 1;
+int findFirstIndex(vector<int>& v, int target)
+  {
+        int s = 0;
+        int e = v.size() - 1;
 
-  int mid = s + (e - s) / 2;
-  int idx = -1;
+        int mid = s + (e - s) / 2;
+        int idx = -1;
 
-  while (s <= e) {
-    if (v[mid] == target) {
-      // search on left side coz target is larger or equal
-      idx = mid;
-      e = mid - 1;
-    } else if (v[mid] < target) {
-      // search on left side coz target is larger
-      s = mid + 1;
-    } else {
-      // search on right side coz target is smaller
-      idx = mid;
-      s = mid + 1;
-    }
-    mid = s + (e - s) / 2;
+        while (s <= e) {
+            if (v[mid] == target) {
+            // search on left side coz target equal
+            idx = mid;
+            e = mid - 1;
+            } else if (v[mid] < target) {
+            // search on left side coz target is larger
+            s = mid + 1;
+            } else {
+            // search on right side coz target is smaller
+            e = mid - 1;
+            }
+            mid = s + (e - s) / 2;
+        }
+        return idx;
   }
-  return idx;
-}
 
 int main() {
 
