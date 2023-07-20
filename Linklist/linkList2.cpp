@@ -17,6 +17,11 @@ class Node {
             this->data = data;
             this->next = NULL;
         }
+
+        //dtor
+        ~Node() {
+            cout << "Node with value " << this->data << " deleted." << endl;
+        }
 };
 
 //I want to insert a node right at the head of the link list.
@@ -101,10 +106,68 @@ void insertAtPosition(int data, int position, Node* &head, Node* &tail) {
 
 }
 
-void print(Node* &head) {
-    while(head!=NULL) {
-        cout << head->data << " ";
+void deleteNode(int position, Node* &head, Node* &tail) {
+    if(head == NULL) {
+        cout << "Cannot delete LL is empty." << endl;
+        return;
+    }
+    //deleting first node
+    if(position == 1) {
+        cout << "Inside 1st node" << endl;
+        Node* temp = head;
         head = head->next;
+        temp->next = NULL;
+        delete temp;
+        return;
+    }
+
+    int len = findLength(head);
+    
+    //deleting last node
+    if(position == len) {
+        cout << "Inside last node" << endl;
+        //find prev
+        int i=0;
+        Node* prev = head;
+        while(i<position-1) {
+            prev = prev->next;
+            i++;
+        }
+        //Step2:
+        prev->next = NULL;
+        //Step3:
+        Node* temp = tail;
+        //Step4:
+        tail = prev;
+        //step5:
+        delete temp;
+        return;
+    }
+
+    //deleting middle node
+    //step: find prev and curr
+    int i=1;
+    Node* prev = head;
+    while(i < position-1) {
+        prev = prev->next;
+        i++;
+    }
+    Node* curr = prev->next;
+
+    //step2:
+    prev->next = curr->next;
+    //step3:
+    curr->next = NULL;
+    //step4:
+    delete curr;
+    return;
+}
+
+void print(Node* &head) {
+    Node* temp = head;
+    while(temp!=NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
     }
 }
 
@@ -117,9 +180,14 @@ int main() {
     insertAtHead(head,tail, 50);
     insertAtTail(head,tail, 10);
     insertAtPosition(100, 5, head, tail);
+    print(head);
 
+    cout << "\nAfter deleting first node: \n";
+    deleteNode(1, head, tail);
+    print(head);
 
-
+    cout << "\nAfter deleting last node: \n";
+    deleteNode(3, head, tail);
     print(head);
     return 0;
 }
