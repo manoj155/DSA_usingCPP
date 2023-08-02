@@ -110,7 +110,7 @@ int main() {
 
     cout << "Middle node is: " << getMiddle(head)->data << endl;
 
-    head = reverseKNodes(head, 3);
+    head =  reverseKNodes(head, 3);
     print(head);
     return 0;
 }
