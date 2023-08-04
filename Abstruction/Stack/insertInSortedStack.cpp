@@ -8,7 +8,7 @@ void insertSorted(stack<int> &s, int target) {
         s.push(target);
         return;
     }
-    if(target >= target) {
+    if(target <= s.top()) {
         s.push(target);
         return;
     }
@@ -18,18 +18,30 @@ void insertSorted(stack<int> &s, int target) {
     s.push(temp);
 }
 
-void sortedOrder(stack<int> &s, int target) {
+void sortedOrder(stack<int> &s) {
     if(s.empty()) {
         return;
     }
     int temp = s.top();
     s.pop();
-    sortedOrder(s, target);
+    sortedOrder(s);
     insertSorted(s, temp);
-
 }
 
 int main() {
+    stack<int> s;
+    s.push(7);
+    s.push(11);
+    s.push(3);
+    s.push(5);
+    s.push(9);
 
+    sortedOrder(s);
+
+    cout << "Printing: " << endl;
+    while(!s.empty()) {
+        cout << s.top() << endl;
+        s.pop();
+    } cout << endl;
     return 0;
 }
