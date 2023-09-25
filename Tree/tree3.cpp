@@ -192,7 +192,7 @@ void printBottomView(Node* root) {
         //ab aapka answer store hua hoga aapke map me 
         cout << "Printing the answer: " << endl;
         for(auto i: topNode) {
-                cout << i.first << " -> " << i.second << endl;
+                cout << i.first << " -> " << i.second << endl;  
         }
 }
 
